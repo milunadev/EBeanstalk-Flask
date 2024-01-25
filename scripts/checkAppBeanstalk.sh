@@ -11,7 +11,7 @@ GROUP_ID=$(aws ec2 describe-security-groups --filters Name=group-name,Values=$SE
 
 if [ -z "$GROUP_ID" ]; then
     echo "El grupo de seguridad no existe. Creando grupo: $SECURITY_GROUP_NAME"
-    GROUP_ID=$(aws ec2 create-security-group --group-name $SECURITY_GROUP_NAME --description "Grupo de seguridad para permitir tráfico en el puerto 80" --query 'GroupId' --output text --region $REGION)
+    GROUP_ID=$(aws ec2 create-security-group --group-name $SECURITY_GROUP_NAME --description "Grupo de seguridad para permitir trafico en el puerto 80" --query 'GroupId' --output text --region $REGION)
     # Agregando regla inbound HTTP
     aws ec2 authorize-security-group-ingress --group-id $GROUP_ID --protocol tcp --port 80 --cidr 0.0.0.0/0 --region $REGION
 else
