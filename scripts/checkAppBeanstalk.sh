@@ -4,6 +4,8 @@
 APP_NAME=$1
 ENV_NAME=$2
 REGION=$3
+BUCKET_NAME=$4
+
 SECURITY_GROUP_NAME="FlaskHTTPSecurityGroup"
 
 # Verificar si el grupo de seguridad ya existe
@@ -23,6 +25,8 @@ if ! aws elasticbeanstalk describe-applications --application-names $APP_NAME --
 then
   echo "Creando aplicación: $APP_NAME"
   aws elasticbeanstalk create-application --application-name $APP_NAME --region $REGION
+  ## Crear una nueva versión de la aplicación ##
+  aws elasticbeanstalk create-application-version --application-name $APP_NAME --version-label "v0" --source-bundle S3Bucket=$BUCKET_NAME,S3Key=artifact.zip --region $REGION
 fi
 
 ## VALIDAR ENVIRONMENT BEANSTALK ##
