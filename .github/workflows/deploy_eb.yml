@@ -14,9 +14,6 @@ jobs:
       #Accion predefinida para copiar el repo en el entorno de ejecucion
       - uses: actions/checkout@v2    
       
-      - name: Crear el package ZIP para despliegue(artifact)
-        run: zip -r artifact.zip requirements.txt application.py ./scripts/
-      
       #Accion predefinida para recuperar credenciales de los secretos de github repo
       - name: Recuperar credenciales AWS
         uses: aws-actions/configure-aws-credentials@v1
@@ -25,6 +22,12 @@ jobs:
           aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
           aws-region: ${{vars.AWS_REGION}}
       
-      - name: Print AWS credentials
-        run: echo ${{ secrets.AWS_ACCESS_KEY_ID }} ${{vars.AWS_REGION}}
+      - name: Validar existencia y creacion del bucket S3 para el artifact
+        run: bash scripts/checkBucketS3.sh ${{vars.AWS_BUCKET_NAME}} ${{vars.AWS_REGION}}
+      
+      - name: Crear el package ZIP para despliegue(artifact)
+        run: zip -r artifact.zip requirements.txt application.py 
+      
+      - name: Cargar el artifact al bucket S3
+        run: aws s3 cp artifact.zip s3://Bucket_FlaskBeanstalk_artifact/
         
