@@ -1,5 +1,7 @@
+Este repositorio contiene el codigo de una aplicacion web Flask basica, scripts de bash y un pipeline de Github actions para automatizar el despliegue inicial y posteriores actualizaciones de una app Flask en AWS Elastic Beanstalk.
 
-USUARIO CON LOS SIGUIENTES PERMISOS:
+REQUISITOS PARA SU EJECUCION:
+    - AccessKeyID y SecretAccessKeyID de un usuario con los permisos especificados en [GithubUserPolicies]()
 - 
 
 
