@@ -3,7 +3,7 @@
 # Declarando variables
 APP_NAME=$1
 ENV_NAME=$2
-BEANSTALK_ROLE=$3
+INSTANCE_PROFILE=$3
 REGION=$4
 BUCKET_NAME=$5
 
@@ -36,7 +36,7 @@ fi
 if ! aws elasticbeanstalk describe-environments --application-name $APP_NAME --environment-names $ENV_NAME --region $REGION | grep -q $ENV_NAME; 
 then
     echo "Creando entorno: $ENV_NAME"
-    aws elasticbeanstalk create-environment --application-name $APP_NAME --environment-name $ENV_NAME --version-label "v0" --solution-stack-name "64bit Amazon Linux 2 v3.5.10 running Python 3.8" --option-settings Namespace=aws:autoscaling:launchconfiguration,OptionName=SecurityGroups,Value=$SECURITY_GROUP_NAME --region $REGION --option-settings Namespace=aws:autoscaling:launchconfiguration,OptionName=IamInstanceProfile,Value=EC2-beanrole
+    aws elasticbeanstalk create-environment --application-name $APP_NAME --environment-name $ENV_NAME --version-label "v0" --solution-stack-name "64bit Amazon Linux 2 v3.5.10 running Python 3.8" --option-settings Namespace=aws:autoscaling:launchconfiguration,OptionName=SecurityGroups,Value=$SECURITY_GROUP_NAME --region $REGION --option-settings Namespace=aws:autoscaling:launchconfiguration,OptionName=IamInstanceProfile,Value=$INSTANCE_PROFILE
 else
     echo "El ambiente $ENV_NAME ya existe en beanstalk."
 fi
