@@ -8,7 +8,23 @@ on:
 #definimos la logica del flujo en un solo job, con varios pasos con el fin de tener orden en el flujo
 jobs:
   deploy:
-    #Escogemos el ambiente donde ejecutaremos el/los scripts
+    #Escogemos el entorno de ejecucion
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+      #Accion predefinida para copiar el repo en el entorno de ejecucion
+      - uses: actions/checkout@v2    
+      
+      - name: Crear el package ZIP para despliegue(artifact)
+        run: zip -r artifact.zip requirements.txt application.py ./scripts/
+      
+      #Accion predefinida para recuperar credenciales de los secretos de github repo
+      - name: Recuperar credenciales AWS
+        uses: aws-actions/configure-aws-credentials@v1
+        with: 
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{vars.AWS_REGION}}
+      
+      - name: Print AWS credentials
+        run: echo ${{ secrets.AWS_ACCESS_KEY_ID }} ${{vars.AWS_REGION}}
+        
