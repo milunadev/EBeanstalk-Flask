@@ -32,7 +32,7 @@ jobs:
         run: aws s3 cp artifact.zip s3://${{vars.AWS_BUCKET_NAME}}/
       
       - name: Validar existencia y creacion de la app y environment de Beanstalk
-        run: bash scripts/checkAppBeanstalk.sh ${{vars.APP_NAME}} ${{vars.ENV_NAME}} ${{vars.BEANSTALK_ROLE}} ${{vars.AWS_REGION}} ${{vars.AWS_BUCKET_NAME}}
+        run: bash scripts/checkAppBeanstalk.sh ${{vars.APP_NAME}} ${{vars.ENV_NAME}} ${{vars.INSTANCE_PROFILE}} ${{vars.AWS_REGION}} ${{vars.AWS_BUCKET_NAME}}
       
       - name: Crear una nueva version de la app desde el artifact en S3
         run: aws elasticbeanstalk create-application-version --application-name ${{vars.APP_NAME}} --source-bundle S3Bucket=${{vars.AWS_BUCKET_NAME}},S3Key=artifact.zip --region ${{vars.AWS_REGION}} --version-label "ver-${{ github.sha }}" --description "commit-sha-${{ github.sha }}"
