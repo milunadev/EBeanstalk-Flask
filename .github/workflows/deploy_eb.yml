@@ -1,0 +1,14 @@
+name: deployToEB
+
+#definimos el trigger, cuando haya algun push en la rama main.
+on:
+  push:
+    branches: [main]
+
+#definimos la logica del flujo en un solo job, con varios pasos con el fin de tener orden en el flujo
+jobs:
+  deploy:
+    #Escogemos el ambiente donde ejecutaremos el/los scripts
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
