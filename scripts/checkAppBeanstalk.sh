@@ -29,5 +29,5 @@ fi
 if ! aws elasticbeanstalk describe-environments --application-name $APP_NAME --environment-names $ENV_NAME --region $REGION | grep -q $ENV_NAME; 
 then
     echo "Creando entorno: $ENV_NAME"
-    aws elasticbeanstalk create-environment --application-name $APP_NAME --environment-name $ENV_NAME --solution-stack-name "64bit Amazon Linux 2 v3.5.10 running Python 3.8" --option-settings Namespace=aws:autoscaling:launchconfiguration,OptionName=SecurityGroups,Value=$GROUP_ID --region $REGION
+    aws elasticbeanstalk create-environment --application-name $APP_NAME --environment-name $ENV_NAME --solution-stack-name "64bit Amazon Linux 2 v3.5.10 running Python 3.8" --option-settings Namespace=aws:autoscaling:launchconfiguration,OptionName=SecurityGroups,Value=$SECURITY_GROUP_NAME --region $REGION
 fi
