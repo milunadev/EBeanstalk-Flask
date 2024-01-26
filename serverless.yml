@@ -8,18 +8,7 @@ provider:
   runtime: nodejs18.x 
   
 
-functions:
-  hello:
-    handler: handler.hello
-    package:
-      individually: true
-      exclude:
-        - "**"
-        - ReadME.md
-        - permisos/**
-      include:
-        - aplicacion/**
-  
+functions:  
   helloUser:
     package:
       individually: true
