@@ -13,6 +13,7 @@ Globals:
 Resources:
   HelloWorldFunction:
     Type: AWS::Serverless::Function 
+    Properties:
       FunctionName: Lambda-MiLuna
       CodeUri: hello_world/
       Handler: app.lambda_handler
