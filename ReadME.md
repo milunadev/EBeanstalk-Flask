@@ -46,8 +46,27 @@ Para las actualizaciones no se creará nada nuevo(el paso 4 solo valida la exist
 ![Alt text](image-2.png)
 
 
+## VALIDACION
+1. Cuando todo se crea por primera vez:
+    - Validacion/creacion S3.
+        ![Alt text](image-4.png)
+    - Crear y carga el artifact, siempre se ejecuta.
+        ![Alt text](image-5.png)
+    - Validacion del SG, APP beanstalk y env.
+        ![Alt text](image-6.png)
+        ![Alt text](image-7.png)
+    - Creacion de la version y despliegue.
+        ![Alt text](image-8.png)
+    
+    ![Alt text](image-9.png)
+
+2. Cuando solo se actualiza el código: 
+    - 
+
+
+Al final recibimos los parametros de la aplicacion beanstalk, nos interesa probar el endpointURL: http://awseb-e-m-awsebloa-1enzpbm8xae1-244946502.us-east-2.elb.amazonaws.com/ 
+![Alt text](image-3.png)
 
 
 ## MEJORAS
-- Implementar environments y environment variables y secrets para automatizar el despliegue en diferentes ambientes, aplicando asi la reutilizacion del pipeline.
-- Se usa la VPC por defecto
+- En el futuro se podria implementar una plantilla de IaaC (Cloudformation o Terraform) que puede ser ejecutado por el pipeline, asi 

@@ -19,7 +19,7 @@ def hello_world():
             </style>
         </head>
         <body>
-            <h1>Hola!!</h1>
+            <h1>Hola, de nuevo!!</h1>
             <h2>Estas en una aplicacion de Elastic Beanstalk.</h2>
             <h4>Desplegada por Github Actions, bash scripts y AWS CLI commandos.</h4>
         </body>
