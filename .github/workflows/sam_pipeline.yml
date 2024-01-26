@@ -1,0 +1,34 @@
+name: deploytoLambda_API
+
+#definimos el trigger, cuando haya algun push en la rama lambdaApiGateway
+on:
+  push:
+    branches: [lambdaApiGateway]
+
+#definimos la logica del flujo de trabajo
+jobs:
+  deploy:
+    #Escogemos el entorno de ejecucion
+    runs-on: ubuntu-latest
+    environment: LambdaENV
+    steps:
+      #Accion predefinida para copiar el repo en el entorno de ejecucion
+      - uses: actions/checkout@v2    
+      - uses: actions/setup-python@v2
+      - uses: aws-actions/setup-sam@v1
+      #Accion predefinida para recuperar credenciales de los secretos de github repo
+      - name: Recuperar credenciales AWS
+        uses: aws-actions/configure-aws-credentials@v1
+        with: 
+          aws-access-key-id: ${{ secrets.ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
+          aws-region: ${{vars.AWS_REGION}}
+      
+      - name: Validar existencia y creacion del bucket S3 para el artifact
+        run: bash scripts/checkBucketS3.sh ${{vars.AWS_BUCKET_NAME}} ${{vars.AWS_REGION}}
+      
+      - name: Build de la aplicacion usando el SAM template
+        run: cd LambdaGithubApp/ && sam build --use-container
+      
+      - run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --stack-name sam-lambda-app --s3-bucket ${{vars.AWS_BUCKET_NAME}} --region ${{vars.AWS_REGION}}
+      
