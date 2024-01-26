@@ -1,5 +1,5 @@
 Este repositorio contiene el codigo JS de un Lambda que será desplegado mediante el framework Serverless en conjunto con una API Gateway que permite su acceso desde Internet.
-
+El gran beneficio de usar el framework Serverless es que podemos desplegar arquitecturas serverless simples o complejas a través de un solo archivo YML, además el framework ya maneja la idempotencia por lo que no se suelen presentan incompatibilidades ante la creacion o actualización de la arquitectura.
 ## ARQUITECTURA:
 
 ## TECNOLOGIAS USADAS:
@@ -49,5 +49,9 @@ Este pipeline de GitHub Actions, nombrado deployServerlessFramework, automatiza 
 
 - Al finalizar el pipeline de Github se muestran los logs de interes, que incluyen en endpoint HTTP que usaremos para consultar la aplicacion desplegada en Lambda.
 
+![Alt text](static/url.png)
+- Consultando la URL:  https://4jssc7693k.execute-api.us-east-2.amazonaws.com/dev/pruebatecnica
+
+![Alt text](static/WEB.png)
 ## MEJORAS
 - Evaluar a detalle que permisos son requeridos explicitamente por el framework de serverless para aplicar el principio de minimo privilegio, por ahora se abrieron permisos full a servicios involucrados como ApiGateway, S3 para almacenar el artifact, Lambda, Cloudwatch y CloudFormation.
