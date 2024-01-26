@@ -5,7 +5,6 @@ Este repositorio contiene el codigo de una aplicacion web Flask basica, scripts 
 Beanstalk es un servicio ideal si nos queremos enfocar en el desarrollo y despliegue del codigo y no demasiado por la infraestructura. Se encarga de desplegar todo lo necesario, desde instancias, balanceador de carga, target groups, lister rules, grupo de autoscaling, etc.
 Además proporciona funcionalidades de rollback automatico, diferentes estrategias de despliege que lo hacen una herramienta excelente para esta tarea.
 Adicionalmente usamos un bucket S3 para subir los artifacts producto de la construcción de Github Actions.
-
 ![Alt text](static/image-14.png)
 
 ## Tecnologías Utilizadas
