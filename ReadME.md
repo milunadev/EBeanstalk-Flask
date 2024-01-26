@@ -39,7 +39,15 @@ Este pipeline de GitHub Actions, nombrado deployServerlessFramework, automatiza 
 ![Alt text](static/image-2.png)
 
 ## EJECUCION
+- Realizamos un cambio en el codigo de la app, seguido de un git push origin serverlessframework desde el local y se dispara el pipeline. Vemos que se completa la ejecución con exito.
 
+![Alt text](static/pipeline.png)
+
+- Verificamos tambien la ejecución del stack de Cloudformation la cual actualiza el artifact almacenado en S3 con el nuevo código de la app que se pasará a desplegar en Lambda.
+
+![Alt text](static/cloudf.png)
+
+- Al finalizar el pipeline de Github se muestran los logs de interes, que incluyen en endpoint HTTP que usaremos para consultar la aplicacion desplegada en Lambda.
 
 ## MEJORAS
 - Evaluar a detalle que permisos son requeridos explicitamente por el framework de serverless para aplicar el principio de minimo privilegio, por ahora se abrieron permisos full a servicios involucrados como ApiGateway, S3 para almacenar el artifact, Lambda, Cloudwatch y CloudFormation.
