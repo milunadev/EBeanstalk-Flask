@@ -1,21 +1,28 @@
-name: deploytoLambda_API
+name: deployServerlessFramework
 
-#definimos el trigger, cuando haya algun push en la rama lambdaApiGateway
+#definimos el trigger, cuando haya algun push en la rama serverlessframework
 on:
   push:
-    branches: [lambdaApiGateway]
+    branches: [serverlessframework]
 
 #definimos la logica del flujo de trabajo
 jobs:
   deploy:
     #Escogemos el entorno de ejecucion
     runs-on: ubuntu-latest
-    environment: LambdaENV
+    environment: ServerlessENV
     steps:
       #Accion predefinida para copiar el repo en el entorno de ejecucion
       - uses: actions/checkout@v2    
-      - uses: actions/setup-python@v2
-      - uses: aws-actions/setup-sam@v1
+
+      - name: Seteando node en el entorno de ejecucion
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+      
+      - name: Instalando el framework de serverless
+        run: npm install serverless
+
       #Accion predefinida para recuperar credenciales de los secretos de github repo
       - name: Recuperar credenciales AWS
         uses: aws-actions/configure-aws-credentials@v1
@@ -24,11 +31,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
           aws-region: ${{vars.AWS_REGION}}
       
-      - name: Validar existencia y creacion del bucket S3 para el artifact
-        run: bash scripts/checkBucketS3.sh ${{vars.AWS_BUCKET_NAME}} ${{vars.AWS_REGION}}
+      - name: Desplegar el template serverless a AWS
+        run: sls deploy --region ${{vars.AWS_REGION}} --verbose
       
-      - name: Build de la aplicacion usando el SAM template
-        run: cd LambdaGithubApp/ && sam build --use-container
-      
-      - run: cd LambdaGithubApp/ && sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --stack-name sam-lambda-app --s3-bucket ${{vars.AWS_BUCKET_NAME}} --region ${{vars.AWS_REGION}}
       

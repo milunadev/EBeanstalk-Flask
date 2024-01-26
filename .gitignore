@@ -1,12 +1,6 @@
-.idea/
-.vscode/
-__pycache__/
-.tox/
-.coverage
-.coverage.*
-htmlcov/
-docs/_build/
-dist/
-venv/
-flask-env/
-*.zip
+# package directories
+node_modules
+jspm_packages
+
+# Serverless directories
+.serverless

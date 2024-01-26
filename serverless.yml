@@ -1,0 +1,37 @@
+# Welcome to Serverless!
+
+service: ServerlessNodeApp
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x 
+  
+
+functions:
+  hello:
+    handler: handler.hello
+    package:
+      individually: true
+      exclude:
+        - "**"
+        - ReadME.md
+        - permisos/**
+      include:
+        - aplicacion/**
+  
+  helloUser:
+    package:
+      individually: true
+      exclude:
+        - "**"
+        - ReadME.md
+        - permisos/**
+      include:
+        - aplicacion/**
+    handler: aplicacion/handler.helloUser
+    events:
+      - http:
+          method: GET
+          path: /usuario
+      
