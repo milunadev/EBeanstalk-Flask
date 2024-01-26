@@ -1,17 +1,32 @@
-Este repositorio contiene el codigo de una aplicacion web Flask basica, scripts de bash y un pipeline de Github actions para automatizar el despliegue inicial y posteriores actualizaciones de una app Flask en AWS Elastic Beanstalk.
+# PREGUNTA 1
+Diseñar la infraestructura de CI/CD de Github a un Elastic Beanstalk en AWS , Github a un Lambda y ApiGateway y de un proyecto en serverless (Framework) en Github con despliege automatico 
 
-## REQUISITOS PARA SU EJECUCION:
-
-- AccessKeyID y SecretAccessKeyID de un usuario con los permisos especificados en [GithubUserPolicies](https://github.com/milunadev/EBeanstalk-Flask/blob/main/permisos/githubuser_policies.json). Ambas deben ser declarados como secretos de repositorio en GitHub.
+Este repositorio contiene tres ramas, cada una para los 3 escenarios propuestos en la pregunta 1. Cada escenario está aislado en su propia rama, utilizando entornos de GitHub para gestionar las configuraciones de despliegue de forma segura y específica.
 ![Alt text](static/image.png)
 
-- Definir el nombre 'EC2 Instance profile' como una variable de repositorio con el nombre de INSTANCE_PROFILE. En caso no se tenga un pperfil de instancia, puede crear un rol con la politica gestionada llamada 'AWSElasticBeanstalkWebTier' o usar el formato JSON de esta politica en [beanstalk_ec2_instanceprofile](https://github.com/milunadev/EBeanstalk-Flask/blob/main/permisos/beanstalk_ec2_instanceprofile.json).
-
-- Definir las siguientes variables de repositorio con los valores correspondientes:
-![Alt text](static/variables.png).
-
+## USO DE AMBIENTES EN GITHUB ACTIONS
+Los ambientes de GitHub Actions se utilizan para proporcionar configuraciones aisladas y seguras para cada escenario de despliegue. Esto incluye la gestión de secretos como las credenciales de AWS, variables de entorno específicas de cada entorno y controles de seguridad adicionales.
+![Alt text](static/image-2.png)
 
 
-MEJORAS
-- Implementar environments y environment variables y secrets para automatizar el despliegue en diferentes ambientes, aplicando asi la reutilizacion del pipeline.
-- Se usa la VPC por defecto
+
+## Escenarios de Despliegue
+Cada rama representa un escenario único y está configurada con su propio conjunto de GitHub Actions y recursos AWS.
+### 1. Elastic Beanstalk
+
+- Rama: elastic-beanstalk
+- Entorno: BeanstalkENV
+- Descripción: Despliegue automático de una aplicación Flask en AWS Elastic Beanstalk.
+- Ver rama [Elastic Beanstalk](https://github.com/milunadev/PruebaTecnica_p1/tree/beanstalkFlask)
+
+### 2. Lambda y API Gateway
+- Rama: lambda-api-gateway
+- Entorno: LambdaENV
+- Descripción: Implementación de una función Lambda accesible a través de API Gateway, configurada para despliegues automáticos.
+- Ver rama [Lambda y API Gateway](https://github.com/milunadev/PruebaTecnica_p1/tree/lambdaApiGateway)
+
+### 3. Serverless Framework
+- Rama: serverless-framework
+- Entorno: ServerlessENV
+- Descripción: Despliegue automático de un servicio serverless utilizando el Serverless Framework para la gestión de infraestructura como código.
+- Ver rama [Serverless Framework](https://github.com/milunadev/PruebaTecnica_p1/tree/serverlessframework)
