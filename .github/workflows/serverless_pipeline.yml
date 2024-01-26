@@ -21,7 +21,7 @@ jobs:
           node-version: '18'
       
       - name: Instalando el framework de serverless
-        run: npm install serverless
+        run: npm install serverless && echo serverless --version 
 
       #Accion predefinida para recuperar credenciales de los secretos de github repo
       - name: Recuperar credenciales AWS
@@ -32,6 +32,6 @@ jobs:
           aws-region: ${{vars.AWS_REGION}}
       
       - name: Desplegar el template serverless a AWS
-        run: sls deploy --region ${{vars.AWS_REGION}} --verbose
+        run: serverless deploy --region ${{vars.AWS_REGION}} --verbose
       
       
