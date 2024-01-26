@@ -21,7 +21,7 @@ jobs:
           node-version: '18'
       
       - name: Instalando el framework de serverless
-        run: npm install serverless && echo serverless --version 
+        run: npm install -g serverless && serverless --version 
 
       #Accion predefinida para recuperar credenciales de los secretos de github repo
       - name: Recuperar credenciales AWS
