@@ -30,5 +30,5 @@ jobs:
       - name: Build de la aplicacion usando el SAM template
         run: cd LambdaGithubApp/ && sam build --use-container
       
-      - run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --stack-name sam-lambda-app --s3-bucket ${{vars.AWS_BUCKET_NAME}} --region ${{vars.AWS_REGION}}
+      - run: cd LambdaGithubApp/ && sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --stack-name sam-lambda-app --s3-bucket ${{vars.AWS_BUCKET_NAME}} --region ${{vars.AWS_REGION}}
       
