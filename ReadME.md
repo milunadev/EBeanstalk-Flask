@@ -1,5 +1,10 @@
 Este repositorio contiene el codigo de una aplicacion Python y todo lo necesario para el despliegue automatico del Lambda que lo correrá, el API gateway para las llamadas y el S3 bucket para almacenar artefactos. Esto se hará a traves de AWS SAM, servicio que facilita el despliegue con IaaC para arquitecturas serverless y con Github Actions para despliegues y actualizaciones automaticas.
 
+## ARQUITECTURA
+El diagrama comienza con el repositorio de código en GitHub. Cada push al repositorio activa el pipeline de GitHub Actions, que ejecuta varios pasos de construcción, prueba y despliegue. Utilizando AWS SAM, el código se empaqueta y se despliega en AWS, creando o actualizando los recursos necesarios como Lambda, API Gateway y S3 Bucket. Las flechas indican el flujo de operaciones desde el inicio del despliegue hasta el acceso del usuario a la función a través de API Gateway.
+![Alt text](image.png)
+
+
 ## Tecnologías Utilizadas
 - AWS Serverless Application Model (SAM)
 - GitHub Actions
