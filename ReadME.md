@@ -22,7 +22,7 @@ El diagrama comienza con el repositorio de código en GitHub. Cada push al repos
 ## SAM TEMPLATE
 El template SAM define la infraestructura serverless que se despliega a través de AWS CloudFormation. En la sección de recursos definimos que se creará una funcion Lambda llamada "Lambda-MiLuna", definimos tambien la ubicacion donde se halla la funcion, el runtime, el metodo que se llamará y un evento HTTP GET, que representa la API gateway que se creará.
 Importante tambien definir los outputs para obtener de forma rapida el endpoint de consulta.
-![Alt text](static/image-3.png)
+![Alt text](image-1.png)
 
 
 ## GITHUB ACTIONS
